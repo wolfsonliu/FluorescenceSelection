@@ -1,0 +1,10 @@
+Package: FluorescenceSelection
+Title: Bird migration staging modeling
+Description: R package to ranking genes from fluorescence enrichment data.
+Version: 0.1.0
+Author: Wolfson Liu <wolfsonliu@live.com>
+Maintainer: Wolfson Liu <wolfsonliu@live.com>
+License: GPL-3
+URL: https://github.com/wolfsonliu/FluorescenceSelection
+Encoding: UTF-8
+RoxygenNote: 7.1.1
