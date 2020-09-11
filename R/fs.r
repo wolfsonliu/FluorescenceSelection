@@ -16,10 +16,12 @@
 ##' @param selection.ratio numeric, value should be in (0, 1), the
 ##'     ratio of cells in fluorescence group which were selected from
 ##'     reference group.
-##' @param n.to.consider integer, the number of barcodes to be used
-##'     for ranking of genes. Genes with more barcodes than
-##'     n.to.consider will be ranked by randomly sampled barcodes
-##'     (with bootstrapping to make stable results).
+##' @param multiplier float, default to be NA. multiplier for
+##'     normalization, left NA for automatic calculation.
+##' @param n.to.consider integer, default to be NA. the number of
+##'     barcodes to be used for ranking of genes. Genes with more
+##'     barcodes than n.to.consider will be ranked by randomly sampled
+##'     barcodes (with bootstrapping to make stable results).
 ##'
 ##' @return returns the fs data type, which is a list containing gene
 ##'     ranks, barcode data, and analysis parameters.
@@ -37,6 +39,7 @@ fluorescence.selection <- function(gene,
                                    reference,
                                    fluorescence,
                                    selection.ratio,
+                                   multiplier=NA,
                                    n.to.consider=NA)
 {
     ## checks
@@ -79,7 +82,9 @@ fluorescence.selection <- function(gene,
         selection.ratio=c(1, selection.ratio)
     )
 
-    multiplier <- max(1/norm.factor)
+    if (is.na(multiplier)) {
+        multiplier <- max(1/norm.factor)
+    }
 
     fs.barcode$reference.norm <- fs.barcode$reference.raw *
         norm.factor[1] * multiplier
